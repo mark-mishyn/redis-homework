@@ -10,6 +10,9 @@ r = redis.Redis(host='localhost', port=6379, db=0)
 
 
 def get_long_value() -> str:
+	"""
+	Important: with 1mb max memory in redis and such long value only 6 key-values can be set.  
+	"""
 	return 1000 * "some-long-value-goes-here"
 
 
