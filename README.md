@@ -14,5 +14,5 @@ There is a pytoh script with fucntions to test 6 keys evistion policies:
 There is a python script with function that allows to get value from cache or return None if key is *pseudo* expired. The smalled ttl leads to bigger chance to re-set value to cache.
 
 
-## Redis Cluster
+### Redis Cluster
 Simple Docker-compose with Redis master, slave and sentinel nodes
