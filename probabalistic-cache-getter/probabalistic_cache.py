@@ -1,5 +1,14 @@
 import math
 from random import random
+import time
+
+DEFAULT_TTL = 3600
+
+
+def slow_db_query(key: str):
+     time.sleep(5)
+     return 42
+
 
 def get_from_db(ttl: int) -> bool:
      """
@@ -16,8 +25,13 @@ def get_from_db(ttl: int) -> bool:
      prob = math.log(ttl / 100) * -15
      return (random() * 100) < prob
 
-def get_from_cache(key: str):
+
+def get_set_from_cache(key: str):
      ttl = r.ttl(key)
-     if not get_from_cache(ttl):
-          return r.get(key)
+     if get_from_db(ttl):
+          value = slow_db_query()
+          r.set(key, value, ex=DEFAULT_TTL)
+          return value
+
+     return r.get(key)
 

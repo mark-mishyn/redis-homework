@@ -8,8 +8,10 @@ TOO_MANY_KEYS_COUNT = 10
 
 r = redis.Redis(host='localhost', port=6379, db=0)
 
+
 def get_long_value() -> str:
 	return 1000 * "some-long-value-goes-here"
+
 
 def test_base_eviction():
 	r.config_set("maxmemory-policy", "allkeys-random")
@@ -21,6 +23,7 @@ def test_base_eviction():
 
 	assert r.dbsize() > 0
 	assert r.dbsize() < TOO_MANY_KEYS_COUNT
+
 
 def test_all_keys_lru():
 	r.config_set("maxmemory-policy", "allkeys-lru")
