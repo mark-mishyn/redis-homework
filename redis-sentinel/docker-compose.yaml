@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+ 
+  redis-master:
+    image: redis:6-alpine
+    volumes:
+      - "./.data:/data"
+      - "./redis.conf:/usr/local/etc/redis/redis.conf"
+    ports:
+      - "6379:6379"
+ 
+  redis-slave:
+    image: redis:6-alpine
+    command: redis-server --slaveof redis-master 6379
+    links:
+      - redis-master
+    volumes:
+      - "./.data:/data"
+     
+  redis-sentinel:
+    build: 
+      context: ./redis-sentinel
+    links:
+      - redis-master
+    ports:
+      - '26379:26379'
