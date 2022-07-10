@@ -2,7 +2,7 @@
 
 ### Keys Eviction
 Here we are using simplest Redis setup. File redis.conf sets max memory to 1mb.  
-There is a pytoh script with fucntions to test 6 keys evistion policies:
+There is a python script with fucntions to test 6 keys evistion policies:
 1. allkeys-random
 2. allkeys-lru
 3. allkeys-lfu
